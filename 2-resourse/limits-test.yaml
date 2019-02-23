@@ -14,7 +14,7 @@ spec:
       cpu: 3
       memory: 2
     type: Pod
-  - defaultLimit:
+  - default:
       cpu: 300m
       memory: 200Mi
     defaultRequest:
