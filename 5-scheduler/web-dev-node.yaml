@@ -36,20 +36,21 @@ spec:
           failureThreshold: 2
           successThreshold: 1
           timeoutSeconds: 5
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoreDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: beta.kubernetes.io/arch
-            operator: In
-            values:
-            - amd64
-      preferredDuringSchedulingIgnoreDuringExecution:
-      - weight: 1
-        preference:
-          matchExceptions:
-          - key: disktype
-            operator: NotIn
-            values:
-            - ssd
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoreDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: beta.kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
+          preferredDuringSchedulingIgnoreDuringExecution:
+          - weight: 1
+            preference:
+              matchExceptions:
+              - key: disktype
+                operator: NotIn
+                values:
+                - ssd
+
