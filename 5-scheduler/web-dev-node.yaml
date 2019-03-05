@@ -1,56 +1,37 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-demo
+  name: web-demo-node
   namespace: dev
 spec:
   selector:
     matchLabels:
-      app: web-demo
+      app: web-demo-node
   replicas: 1
   template:
     metadata:
       labels:
-        app: web-demo
+        app: web-demo-node
     spec:
       containers:
-      - name: web-demo
+      - name: web-demo-node
         image: hub.mooc.com/kubernetes/web:v1
         ports:
         - containerPort: 8080
-        livenessProbe:
-          tcpSocket:
-            port: 8080
-          initialDelaySeconds: 20
-          periodSeconds: 10
-          failureThreshold: 2
-          successThreshold: 1
-          timeoutSeconds: 5
-        readinessProbe:
-          httpGet:
-            path: /examples/index.html
-            port: 8080
-            scheme: HTTP
-          initialDelaySeconds: 20
-          periodSeconds: 10
-          failureThreshold: 2
-          successThreshold: 1
-          timeoutSeconds: 5
       affinity:
         nodeAffinity:
-          requiredDuringSchedulingIgnoreDuringExecution:
+          requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
               - key: beta.kubernetes.io/arch
                 operator: In
                 values:
                 - amd64
-          preferredDuringSchedulingIgnoreDuringExecution:
+          preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 1
             preference:
-              matchExceptions:
+              matchExpressions:
               - key: disktype
                 operator: NotIn
                 values:
                 - ssd
-
