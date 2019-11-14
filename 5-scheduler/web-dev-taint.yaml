@@ -18,8 +18,14 @@ spec:
         image: hub.mooc.com/kubernetes/web:v1
         ports:
         - containerPort: 8080
+      #第一种表达方式，effect可选值：NoSchedule、NoExecute
       tolerations:
       - key: "key"
         operator: "Equal"
         value: "value"
         effect: "NoSchedule"
+      #第二种表达方式
+      #tolerations:
+      #- key: "key"
+      #  operator: "Exists"
+      #  effect: "NoSchedule"
